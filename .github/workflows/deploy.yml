@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4   # ✅ FIXED
+        uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -23,6 +23,11 @@ jobs:
 
       - name: Build app (Vite)
         run: npm run build
+
+      # ✅ IMPORTANT STEP
+      - name: Copy build files to root
+        run: |
+          cp -r dist/* .
 
       - name: Deploy to Azure
         uses: azure/webapps-deploy@v3
